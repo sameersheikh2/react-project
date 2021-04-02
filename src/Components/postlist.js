@@ -1,34 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
 
-class Postlist extends Component {
+const Postlist = () => {
+    const [posts, setPosts] = React.useState([]);
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            post: []
-        }
-
-    }
-    componentDidMount() {
+    React.useEffect(() => {
         axios.get("https://jsonplaceholder.typicode.com/posts")
-            .then(Response => {
-                console.log(Response);
+            .then(({ data }) => {
+                setPosts(data);
             })
             .catch(error => {
                 console.log(error);
-
             })
-    }
+    }, []);
 
 
-    render() {
-        return (
-            <div>
-                <h1> POST list</h1>
-            </div>
-        )
-    }
+    return (
+        <Container fluid>
+            <h1>Posts</h1>
+            {JSON.stringify(posts, null, 2)}
+        </Container>
+    );
 }
+
 export default Postlist;
