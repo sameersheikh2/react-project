@@ -14,8 +14,8 @@ const Postlist = () => {
                 console.log('posts: ', data[1]);
                 setPosts(data);
             })
-            .catch(error => {
-                console.log(error);
+        .catch(error => {
+             console.log(error);
             })
     }, []);
 
